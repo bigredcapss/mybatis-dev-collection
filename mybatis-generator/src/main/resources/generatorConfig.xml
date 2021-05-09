@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="application.properties"/>
+    <context id="mssql" targetRuntime="MyBatis3">
+        <commentGenerator>
+            <!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+            <property name="suppressAllComments" value="true" />
+            <property name="suppressDate" value="true"/>
+            <property name="addRemarkComments" value="true"/>
+        </commentGenerator>
+        <!--数据库连接URL，用户名、密码 -->
+        <jdbcConnection driverClass="${spring.datasource.driver-class-name}"
+                        connectionURL="${spring.datasource.url}"
+                        userId="${spring.datasource.username}"
+                        password="${spring.datasource.password}">
+        </jdbcConnection>
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+        <!-- 生成bean的包名和位置-->
+        <javaModelGenerator targetPackage="com.lg.framework.mbg.entity" targetProject="mybatis-generator\src\main\java">
+            <property name="enableSubPackages" value="false" />
+            <property name="trimStrings" value="true" />
+        </javaModelGenerator>
+        <!-- targetProject:mapper映射文件生成的位置 -->
+        <sqlMapGenerator targetPackage="com.lg.framework.mbg.mapper" targetProject="mybatis-generator\src\main\resources">
+            <property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+        <!-- targetPackage：mapper接口生成的位置 -->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.lg.framework.mbg.mapper" targetProject="mybatis-generator\src\main\java">
+            <property name="enableSubPackages" value="false" />
+        </javaClientGenerator>
+
+        <!-- 指定数据库表 -->
+        <!--
+            enableInsert（默认true）：指定是否生成insert语句；
+            enableSelectByPrimaryKey（默认true）：指定是否生成按照主键查询对象的语句（就是getById或get）；
+            enableSelectByExample（默认true）：MyBatis3Simple为false，指定是否生成动态查询语句；
+            enableUpdateByPrimaryKey（默认true）：指定是否生成按照主键修改对象的语句（即update)；
+            enableDeleteByPrimaryKey（默认true）：指定是否生成按照主键删除对象的语句（即delete）；
+            enableDeleteByExample（默认true）：MyBatis3Simple为false，指定是否生成动态删除语句；
+            enableCountByExample（默认true）：MyBatis3Simple为false，指定是否生成动态查询总条数语句（用于分页的总条数查询）；
+            enableUpdateByExample（默认true）：MyBatis3Simple为false，指定是否生成动态修改语句（只修改对象中不为空的属性）；
+        -->
+        <!--常规表-->
+        <!--<table tableName="CandidatePositionInfo" schema="dbo" domainObjectName="CandidatePositionInfo">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="CandidateResultZhiShiDian" schema="dbo" domainObjectName="CandidateResultZhiShiDian">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="Conf_Genre" schema="dbo" domainObjectName="ConfGenre">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="Conf_QuestionType" schema="dbo" domainObjectName="ConfQuestionType">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="Conf_Stage" schema="dbo" domainObjectName="ConfStage">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="Conf_StatusKaoChaLeiXing" schema="dbo" domainObjectName="ConfStatusKaoChaLeiXing">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="Conf_StatusKaoDian" schema="dbo" domainObjectName="ConfStatusKaoDian">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="Conf_StatusQuestion" schema="dbo" domainObjectName="ConfStatusQuestion">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="Conf_StatusTask" schema="dbo" domainObjectName="ConfStatusTask">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="Conf_StatusZhiShiDian" schema="dbo" domainObjectName="ConfStatusZhiShiDian">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="Conf_Subject" schema="dbo" domainObjectName="ConfSubject">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="Conf_SubjectQuestionTypeGenre" schema="dbo" domainObjectName="ConfSubjectQuestionTypeGenre">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="Conf_TaskType" schema="dbo" domainObjectName="ConfTaskType">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="Conf_Version" schema="dbo" domainObjectName="ConfVersion">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="Log_Exception" schema="dbo" domainObjectName="LogException">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="Log_Operation" schema="dbo" domainObjectName="LogOperation">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="Permission" schema="dbo" domainObjectName="Permission">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="PositionInfo" schema="dbo" domainObjectName="PositionInfo">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="ResultAnalysis" schema="dbo" domainObjectName="ResultAnalysis">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="ResultKaoChaLeiXing" schema="dbo" domainObjectName="ResultKaoChaLeiXing">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="ResultKaoDian" schema="dbo" domainObjectName="ResultKaoDian">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="ResultZhiShiDian" schema="dbo" domainObjectName="ResultZhiShiDian">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="Role" schema="dbo" domainObjectName="Role">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="SentenceInfo" schema="dbo" domainObjectName="SentenceInfo">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="TestTask" schema="dbo" domainObjectName="TestTask">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="TestTaskAndUser" schema="dbo" domainObjectName="TestTaskAndUser">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="TestContentEntity" schema="dbo" domainObjectName="TestContentEntity">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="TTU_TestQuestionIndex" schema="dbo" domainObjectName="TtuTestQuestionIndex">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="UserInfo" schema="dbo" domainObjectName="UserInfo">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="CheckType" schema="tmp" domainObjectName="CheckType">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="Issue" schema="tmp" domainObjectName="Issue">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="SolveType" schema="tmp" domainObjectName="SolveType">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="IssueType" schema="tmp" domainObjectName="IssueType">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="KnowledgeType" schema="tmp" domainObjectName="KnowledgeType">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+
+        <table tableName="TestTask" schema="dbo" domainObjectName="TestTask">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="QuestionStrategy" schema="dbo" domainObjectName="QuestionStrategy">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="QuestionStrategyConfig" schema="dbo" domainObjectName="QuestionStrategyConfig">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="CandidateResultZhiShiDian" schema="dbo" domainObjectName="CandidateResultZhiShiDian">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="CandidateResultZhiShiDianPosition" schema="dbo" domainObjectName="CandidateResultZhiShiDianPosition">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        -->
+
+        <!--分表-->
+        <!--<table tableName="TTU_TestQuestion0" schema="dbo" domainObjectName="TtuTestQuestion">
+        </table>-->
+
+        <table tableName="IssueRecord" schema="tmp" domainObjectName="IssueRecord">
+            <generatedKey column="ID" sqlStatement="JDBC"></generatedKey>
+        </table>
+        <table tableName="IssueRecordView" schema="tmp" domainObjectName="ViewIssueRecord">
+        </table>
+        <!--视图-->
+        <!--
+        <table tableName="EngKnowledgeReportLoseCountView" schema="ECharts" domainObjectName="ViewEngKpReportLoseCount">
+        </table>
+        <table tableName="EngKnowledgeReportWrongCountView" schema="ECharts" domainObjectName="ViewEngKpReportWrongCount">
+        </table>
+        <table tableName="TaskAndUserView" schema="dbo" domainObjectName="ViewTestTaskAndUser">
+        </table>
+        <table tableName="FullTestContentEntityView" schema="dbo" domainObjectName="ViewTestContentEntity">
+        </table>
+        <table tableName="FullTestContentEntityView" schema="dbo" domainObjectName="ViewTestContentEntity">
+        </table>
+        <table tableName="QuestionPropertyView" schema="dbo" domainObjectName="ViewQuestionProperty">
+        </table>
+        <table tableName="ReportIssueView" schema="tmp" domainObjectName="ViewReportIssue">
+        </table>
+
+        -->
+
+
+
+
+
+    </context>
+</generatorConfiguration>
